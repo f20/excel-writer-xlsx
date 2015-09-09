@@ -8565,7 +8565,7 @@ sub _write_cf_rule {
 
     my @attributes = (
         'type' => $param->{type},
-        $param->{stopIfTrue} ? ( stopIfTrue => 1 ) : ()
+        $param->{stopIfTrue} ? ( 'stopIfTrue' => 1 ) : ()
     );
 
     push @attributes, ( 'dxfId' => $param->{format} )
