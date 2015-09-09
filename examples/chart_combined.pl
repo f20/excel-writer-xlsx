@@ -67,11 +67,12 @@ $worksheet->insert_chart( 'E2', $column_chart1 );
 
 #
 # In the second example we will create a similar combined column and line
-# chart except that the secondary chart will have a secondary Y axis.
+# chart except that the secondary chart will have a secondary Y axis,
+# and that the chart will be on its own sheet.
 #
 
 # Create a new column chart. This will use this as the primary chart.
-my $column_chart2 = $workbook->add_chart( type => 'column', embedded => 1 );
+my $column_chart2 = $workbook->add_chart( type => 'column', name => 'Chart 2' );
 
 # Configure the data series for the primary chart.
 $column_chart2->add_series(
@@ -101,9 +102,5 @@ $column_chart2->set_title(  name => 'Combine chart - secondary Y axis' );
 $column_chart2->set_x_axis( name => 'Test number' );
 $column_chart2->set_y_axis( name => 'Sample length (mm)' );
 $column_chart2->set_y2_axis( name => 'Target length (mm)' );
-
-
-# Insert the chart into the worksheet
-$worksheet->insert_chart( 'E18', $column_chart2 );
 
 __END__
