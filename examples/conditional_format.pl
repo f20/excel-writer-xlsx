@@ -23,6 +23,7 @@ my $worksheet5 = $workbook->add_worksheet();
 my $worksheet6 = $workbook->add_worksheet();
 my $worksheet7 = $workbook->add_worksheet();
 my $worksheet8 = $workbook->add_worksheet();
+my $worksheet9 = $workbook->add_worksheet();
 
 
 # Light red fill with dark red text.
@@ -36,6 +37,13 @@ my $format1 = $workbook->add_format(
 my $format2 = $workbook->add_format(
     bg_color => '#C6EFCE',
     color    => '#006100',
+
+);
+
+# Blue fill with dark blue text.
+my $format3 = $workbook->add_format(
+    bg_color => '#C6CEFF',
+    color    => '#0000FF',
 
 );
 
@@ -77,6 +85,51 @@ $worksheet1->conditional_formatting( 'B3:K12',
 
 # Write another conditional format over the same range.
 $worksheet1->conditional_formatting( 'B3:K12',
+    {
+        type     => 'cell',
+        criteria => '<',
+        value    => 50,
+        format   => $format2,
+    }
+);
+
+
+###############################################################################
+#
+# Example 9 (uses the same data as example 1)
+#
+$caption = 'Cells with values >= 100 are in blue. '
+  . 'Other cells with values >= 50 are in light red. '
+  . 'Values < 50 are in light green.';
+
+# Write the data.
+$worksheet9->write( 'A1', $caption );
+$worksheet9->write_col( 'B3', $data );
+
+# Write a conditional format over a range.
+# Use stopIfTrue to prevent previous formats from being used.
+$worksheet9->conditional_formatting( 'B3:K12',
+    {
+        type       => 'cell',
+        criteria   => '>=',
+        value      => 100,
+        format     => $format3,
+        stopIfTrue => 1,
+    }
+);
+
+# Write another conditional format over the same range.
+$worksheet9->conditional_formatting( 'B3:K12',
+    {
+        type     => 'cell',
+        criteria => '>=',
+        value    => 50,
+        format   => $format1,
+    }
+);
+
+# Write another conditional format over the same range.
+$worksheet9->conditional_formatting( 'B3:K12',
     {
         type     => 'cell',
         criteria => '<',
@@ -311,7 +364,6 @@ $worksheet8->conditional_formatting( 'F3:F14',
         bar_color => '#63C384'
     }
 );
-
 
 
 __END__
