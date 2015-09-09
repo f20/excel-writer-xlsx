@@ -4606,6 +4606,7 @@ The last parameter in C<conditional_formatting()> must be a hash ref containing 
     value
     minimum
     maximum
+    stopIfTrue
 
 Other, less commonly used parameters are:
 
@@ -5038,6 +5039,11 @@ The C<formula> type is used to specify a conditional format based on a user defi
     );
 
 The formula is specified in the C<criteria>.
+
+
+=head2 stopIfTrue
+
+The C<stopIfTrue> parameter, if set to a true value, will enable the "stop if true" feature on the conditional formatting rule, so that subsequent rules are not examined for any cell on which the conditions for this rule are met.
 
 
 =head2 min_type, mid_type, max_type
