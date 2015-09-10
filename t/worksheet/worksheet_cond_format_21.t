@@ -40,11 +40,11 @@ $worksheet->write( 'A4', 40 );
 
 $worksheet->conditional_formatting( 'A1',
     {
-        type       => 'cell',
-        format     => undef,
-        criteria   => 'greater than',
-        value      => 5,
-        stopIfTrue => 1,
+        type         => 'cell',
+        format       => undef,
+        criteria     => 'greater than',
+        value        => 5,
+        stop_if_true => 1,
     }
 );
 # End test code.
@@ -87,7 +87,7 @@ __DATA__
     </row>
   </sheetData>
   <conditionalFormatting sqref="A1">
-    <cfRule type="cellIs" stopIfTrue="1" priority="1" operator="greaterThan">
+    <cfRule type="cellIs" priority="1" stopIfTrue="1" operator="greaterThan">
       <formula>5</formula>
     </cfRule>
   </conditionalFormatting>

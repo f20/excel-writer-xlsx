@@ -4606,7 +4606,6 @@ The last parameter in C<conditional_formatting()> must be a hash ref containing 
     value
     minimum
     maximum
-    stopIfTrue
 
 Other, less commonly used parameters are:
 
@@ -4620,6 +4619,7 @@ Other, less commonly used parameters are:
     mid_color
     max_color
     bar_color
+    stop_if_true
 
 Additional parameters which are used for specific conditional format types are shown in the relevant sections below.
 
@@ -5041,11 +5041,6 @@ The C<formula> type is used to specify a conditional format based on a user defi
 The formula is specified in the C<criteria>.
 
 
-=head2 stopIfTrue
-
-The C<stopIfTrue> parameter, if set to a true value, will enable the "stop if true" feature on the conditional formatting rule, so that subsequent rules are not examined for any cell on which the conditions for this rule are met.
-
-
 =head2 min_type, mid_type, max_type
 
 The C<min_type> and C<max_type> properties are available when the conditional formatting type is C<2_color_scale>, C<3_color_scale> or C<data_bar>. The C<mid_type> is available for C<3_color_scale>. The properties are used as follows:
@@ -5091,6 +5086,11 @@ The C<min_color> and C<max_color> properties are available when the conditional 
     );
 
 The color can be specifies as an Excel::Writer::XLSX color index or, more usefully, as a HTML style RGB hex number, as shown above.
+
+
+=head2 stop_if_true
+
+The C<stop_if_true> parameter, if set to a true value, will enable the "stop if true" feature on the conditional formatting rule, so that subsequent rules are not examined for any cell on which the conditions for this rule are met.
 
 
 =head2 Conditional Formatting Examples

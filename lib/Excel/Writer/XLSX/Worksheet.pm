@@ -3575,23 +3575,23 @@ sub conditional_formatting {
 
     # List of valid input parameters.
     my %valid_parameter = (
-        type       => 1,
-        format     => 1,
-        criteria   => 1,
-        value      => 1,
-        minimum    => 1,
-        maximum    => 1,
-        stopIfTrue => 1,
-        min_type   => 1,
-        mid_type   => 1,
-        max_type   => 1,
-        min_value  => 1,
-        mid_value  => 1,
-        max_value  => 1,
-        min_color  => 1,
-        mid_color  => 1,
-        max_color  => 1,
-        bar_color  => 1,
+        type         => 1,
+        format       => 1,
+        criteria     => 1,
+        value        => 1,
+        minimum      => 1,
+        maximum      => 1,
+        stop_if_true => 1,
+        min_type     => 1,
+        mid_type     => 1,
+        max_type     => 1,
+        min_value    => 1,
+        mid_value    => 1,
+        max_value    => 1,
+        min_color    => 1,
+        mid_color    => 1,
+        max_color    => 1,
+        bar_color    => 1,
     );
 
     # Check for valid input parameters.
@@ -8563,15 +8563,15 @@ sub _write_cf_rule {
     my $self  = shift;
     my $param = shift;
 
-    my @attributes = (
-        'type' => $param->{type},
-        $param->{stopIfTrue} ? ( 'stopIfTrue' => 1 ) : ()
-    );
-
+    my @attributes = ( 'type' => $param->{type} );
+    
     push @attributes, ( 'dxfId' => $param->{format} )
       if defined $param->{format};
 
     push @attributes, ( 'priority' => $param->{priority} );
+
+    push @attributes, ( 'stopIfTrue' => 1 )
+      if defined $param->{stop_if_true};
 
     if ( $param->{type} eq 'cellIs' ) {
         push @attributes, ( 'operator' => $param->{criteria} );
