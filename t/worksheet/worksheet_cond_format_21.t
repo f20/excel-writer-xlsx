@@ -40,11 +40,11 @@ $worksheet->write( 'A4', 40 );
 
 $worksheet->conditional_formatting( 'A1',
     {
-        type       => 'cell',
-        format     => undef,
-        criteria   => 'greater than',
-        value      => 5,
-        stopIfTrue => 1,
+        type         => 'cell',
+        format       => undef,
+        criteria     => 'greater than',
+        value        => 5,
+        stop_if_true => 1,
     }
 );
 # End test code.
