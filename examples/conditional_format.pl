@@ -337,11 +337,11 @@ $worksheet9->write_col( 'B3', $data );
 # if the conditions of this format are met.
 $worksheet9->conditional_formatting( 'B3:K12',
     {
-        type       => 'cell',
-        criteria   => '>=',
-        value      => 100,
-        format     => $format3,
-        stopIfTrue => 1,
+        type         => 'cell',
+        criteria     => '>=',
+        value        => 100,
+        format       => $format3,
+        stop_if_true => 1,
     }
 );
 
