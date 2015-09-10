@@ -24,10 +24,10 @@ use Excel::Writer::XLSX::Format;
 use Excel::Writer::XLSX::Drawing;
 use Excel::Writer::XLSX::Package::XMLwriter;
 use Excel::Writer::XLSX::Utility qw(xl_cell_to_rowcol
-  xl_rowcol_to_cell
-  xl_col_to_name
-  xl_range
-  quote_sheetname);
+                                    xl_rowcol_to_cell
+                                    xl_col_to_name
+                                    xl_range
+                                    quote_sheetname);
 
 our @ISA     = qw(Excel::Writer::XLSX::Package::XMLwriter);
 our $VERSION = '0.85';
@@ -310,7 +310,7 @@ sub _assemble_xml_file {
     #$self->_write_sheet_calc_pr();
 
     # Write the worksheet phonetic properties.
-    if ( $self->{_excel2003_style} ) {
+    if ($self->{_excel2003_style}) {
         $self->_write_phonetic_pr();
     }
 
@@ -1894,7 +1894,7 @@ sub set_start_page {
     my $self = shift;
     return unless defined $_[0];
 
-    $self->{_page_start} = $_[0];
+    $self->{_page_start}   = $_[0];
 }
 
 
@@ -2703,7 +2703,7 @@ sub write_url {
 
     # External links to URLs and to other Excel workbooks have slightly
     # different characteristics that we have to account for.
-    if ( $link_type == 1 || $link_type == 3 ) {
+    if ( $link_type == 1 || $link_type == 3) {
 
         # Escape URL unless it looks already escaped.
         if ( $url !~ /%[0-9a-fA-F]{2}/ ) {
@@ -3029,7 +3029,7 @@ sub set_row {
     # Store the row change to allow optimisations.
     $self->{_row_size_changed} = 1;
 
-    if ( $hidden ) {
+    if ($hidden) {
         $height = 0;
     }
 
@@ -4530,7 +4530,7 @@ sub _get_palette_color {
     # Palette is passed in from the Workbook class.
     my @rgb = @{ $palette->[$index] };
 
-    return sprintf "FF%02X%02X%02X", @rgb[ 0, 1, 2 ];
+    return sprintf "FF%02X%02X%02X", @rgb[0, 1, 2];
 }
 
 
@@ -4792,7 +4792,7 @@ sub _position_object_pixels {
 
     # Calculate the absolute x offset of the top-left vertex.
     if ( $self->{_col_size_changed} ) {
-        for my $col_id ( 0 .. $col_start - 1 ) {
+        for my $col_id ( 0 .. $col_start -1 ) {
             $x_abs += $self->_size_col( $col_id );
         }
     }
@@ -4806,7 +4806,7 @@ sub _position_object_pixels {
     # Calculate the absolute y offset of the top-left vertex.
     # Store the column change to allow optimisations.
     if ( $self->{_row_size_changed} ) {
-        for my $row_id ( 0 .. $row_start - 1 ) {
+        for my $row_id ( 0 .. $row_start -1 ) {
             $y_abs += $self->_size_row( $row_id );
         }
     }
@@ -4877,7 +4877,7 @@ sub _position_object_pixels {
 #
 sub _position_object_emus {
 
-    my $self = shift;
+    my $self       = shift;
 
     my (
         $col_start, $row_start, $x1, $y1,
@@ -5138,12 +5138,12 @@ sub _prepare_chart {
     my $width  = $chart->{_width}  if $chart->{_width};
     my $height = $chart->{_height} if $chart->{_height};
 
-    $width  = int( 0.5 + ( $width * $x_scale ) );
+    $width  = int( 0.5 + ( $width  * $x_scale ) );
     $height = int( 0.5 + ( $height * $y_scale ) );
 
     my @dimensions =
       $self->_position_object_emus( $col, $row, $x_offset, $y_offset, $width,
-        $height );
+        $height);
 
     # Set the chart name for the embedded object if it has been specified.
     my $name = $chart->{_chart_name};
@@ -5316,7 +5316,7 @@ sub _prepare_image {
 
     my @dimensions =
       $self->_position_object_emus( $col, $row, $x_offset, $y_offset, $width,
-        $height );
+        $height);
 
     # Convert from pixels to emus.
     $width  = int( 0.5 + ( $width * 9_525 ) );
@@ -5760,7 +5760,7 @@ sub _prepare_tables {
 
     for my $table ( @{ $self->{_tables} } ) {
 
-        $table->{_id} = $table_id;
+        $table-> {_id} = $table_id;
 
         # Set the table name unless defined by the user.
         if ( !defined $table->{_name} ) {
@@ -5842,7 +5842,7 @@ sub _comment_params {
 
         # Get the RGB color from the palette.
         my @rgb = @{ $palette->[ $color_id - 8 ] };
-        my $rgb_color = sprintf "%02x%02x%02x", @rgb[ 0, 1, 2 ];
+        my $rgb_color = sprintf "%02x%02x%02x", @rgb[0, 1, 2];
 
         # Minor modification to allow comparison testing. Change RGB colors
         # from long format, ffcc00 to short format fc0 used by VML.
@@ -5982,8 +5982,8 @@ sub _button_params {
     $params->{height} = $default_height if !$params->{height};
 
     # Set the x/y offsets.
-    $params->{x_offset} = 0 if !$params->{x_offset};
-    $params->{y_offset} = 0 if !$params->{y_offset};
+    $params->{x_offset}  = 0  if !$params->{x_offset};
+    $params->{y_offset}  = 0  if !$params->{y_offset};
 
     # Scale the size of the comment box if required.
     if ( $params->{x_scale} ) {
@@ -6137,11 +6137,11 @@ sub repeat_formula {
 #
 sub _write_worksheet {
 
-    my $self     = shift;
-    my $schema   = 'http://schemas.openxmlformats.org/';
-    my $xmlns    = $schema . 'spreadsheetml/2006/main';
-    my $xmlns_r  = $schema . 'officeDocument/2006/relationships';
-    my $xmlns_mc = $schema . 'markup-compatibility/2006';
+    my $self                   = shift;
+    my $schema                 = 'http://schemas.openxmlformats.org/';
+    my $xmlns                  = $schema . 'spreadsheetml/2006/main';
+    my $xmlns_r                = $schema . 'officeDocument/2006/relationships';
+    my $xmlns_mc               = $schema . 'markup-compatibility/2006';
 
     my @attributes = (
         'xmlns'   => $xmlns,
@@ -6536,7 +6536,7 @@ sub _write_col_info {
     if ( $width > 0 ) {
         if ( $width < 1 ) {
             $width =
-              int( ( int( $width * ( $max_digit_width + $padding ) + 0.5 ) ) /
+              int( ( int( $width * ($max_digit_width + $padding) + 0.5 ) ) /
                   $max_digit_width *
                   256 ) / 256;
         }
@@ -6857,14 +6857,14 @@ sub _write_row {
         push @attributes, ( 'ht' => $height );
     }
 
-    push @attributes, ( 'hidden' => 1 ) if $hidden;
+    push @attributes, ( 'hidden'       => 1 )         if $hidden;
 
     if ( $height != $self->{_original_row_height} ) {
         push @attributes, ( 'customHeight' => 1 );
     }
 
-    push @attributes, ( 'outlineLevel' => $level ) if $level;
-    push @attributes, ( 'collapsed'    => 1 )      if $collapsed;
+    push @attributes, ( 'outlineLevel' => $level )    if $level;
+    push @attributes, ( 'collapsed'    => 1 )         if $collapsed;
 
     if ( $self->{_excel_version} == 2010 ) {
         push @attributes, ( 'x14ac:dyDescent' => '0.25' );
@@ -7812,7 +7812,7 @@ sub _write_hyperlink_external {
     );
 
     push @attributes, ( 'location' => $location ) if defined $location;
-    push @attributes, ( 'display'  => $display )  if defined $display;
+    push @attributes, ( 'display' => $display )   if defined $display;
     push @attributes, ( 'tooltip'  => $tooltip )  if defined $tooltip;
 
     $self->xml_empty_tag( 'hyperlink', @attributes );
@@ -8043,7 +8043,7 @@ sub _calculate_x_split_width {
         $pixels = int( $width * ( $max_digit_width + $padding ) + 0.5 );
     }
     else {
-        $pixels = int( $width * $max_digit_width + 0.5 ) + $padding;
+          $pixels = int( $width * $max_digit_width + 0.5 ) + $padding;
     }
 
     # Convert to points.
@@ -8200,6 +8200,7 @@ sub _write_legacy_drawing {
 
     $self->xml_empty_tag( 'legacyDrawing', @attributes );
 }
+
 
 
 ##############################################################################
@@ -8564,7 +8565,7 @@ sub _write_cf_rule {
     my $param = shift;
 
     my @attributes = ( 'type' => $param->{type} );
-    
+
     push @attributes, ( 'dxfId' => $param->{format} )
       if defined $param->{format};
 
