@@ -87,7 +87,7 @@ __DATA__
     </row>
   </sheetData>
   <conditionalFormatting sqref="A1">
-    <cfRule type="cellIs" priority="1" stopIfTrue="1" operator="greaterThan">
+    <cfRule priority="1" type="cellIs" stopIfTrue="1" operator="greaterThan">
       <formula>5</formula>
     </cfRule>
   </conditionalFormatting>
