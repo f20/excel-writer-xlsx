@@ -8565,7 +8565,7 @@ sub _write_cf_rule {
     my $param = shift;
 
     my @attributes = ( 'type' => $param->{type} );
-    
+
     push @attributes, ( 'dxfId' => $param->{format} )
       if defined $param->{format};
 
