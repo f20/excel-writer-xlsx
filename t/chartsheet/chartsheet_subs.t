@@ -23,7 +23,7 @@ my $caption = " \tChartsheet: validate subroutines.";
 
 my @expected = _get_module_subs('Excel::Writer::XLSX::Chart');
 my @got = _get_module_subs('Excel::Writer::XLSX::Chartsheet');
-warn "@got";
+
 _is_deep_diff( \@got, \@expected, $caption );
 
 
@@ -40,8 +40,11 @@ sub _get_module_subs {
     # Get the module functions.
     my @subs = sort keys %{"$module\::"};
 
-    # Only return the set_ type and the combine functions.
-    @subs = grep { /^(?:[a-z]+_|combine$)/ } @subs;
+    # Only return the set_ type functions.
+    @subs = grep { /^[a-z]+_/ } @subs;
+
+    # Add any other methods shared with charts.
+    push @subs, ('combine');
 
     # Ignore xl_ imported functions.
     @subs = grep { /^[^x][^l]/ } @subs;
