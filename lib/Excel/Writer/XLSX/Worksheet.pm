@@ -3335,11 +3335,12 @@ sub data_validation {
 
     # No action is required for validation type 'any'
     # unless there are input messages.
-    return 0
-      if $param->{validate} eq 'none'
-      && !exists $param->{input_message}
-      && !exists $param->{input_title};
-
+    if (   $param->{validate} eq 'none'
+        && !defined $param->{input_message}
+        && !defined $param->{input_title} )
+    {
+        return 0;
+    }
 
     # The any, list and custom validations don't have a criteria
     # so we use a default of 'between'.
