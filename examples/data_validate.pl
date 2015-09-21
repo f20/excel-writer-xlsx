@@ -252,10 +252,7 @@ $worksheet->write( $row, 0, $txt );
 $worksheet->data_validation(
     $row, 1,
     {
-        validate      => 'integer',
-        criteria      => 'between',
-        minimum       => 1,
-        maximum       => 100,
+        validate      => 'any',
         input_title   => 'Enter an integer:',
         input_message => 'between 1 and 100',
     }
