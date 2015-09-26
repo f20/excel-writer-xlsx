@@ -40,11 +40,9 @@ my $format2 = $workbook->add_format(
 
 );
 
-# Blue fill with dark blue text.
+# Bold text.
 my $format3 = $workbook->add_format(
-    bg_color => '#C6CEFF',
-    color    => '#0000FF',
-
+    bold => 1,
 );
 
 # Some sample data to run the conditional formatting against.
@@ -324,26 +322,39 @@ $worksheet8->conditional_formatting( 'F3:F14',
 #
 # Example 9
 #
-$caption = 'Cells with values >= 100 are always in blue. '
-  . 'Otherwise, cells with values >= 50 are in light red '
+$caption = 'Cells with values > 95 are in bold with no other formatting. '
+  . 'Otherwise, cells with odd values are bold, '
+  . 'values >= 50 are in light red '
   . 'and values < 50 are in light green.';
 
 # Write the data.
 $worksheet9->write( 'A1', $caption );
 $worksheet9->write_col( 'B3', $data );
 
+
 # Write a conditional format over a range.
-# Use stopIfTrue to prevent previous formats from being used
+# Use stopIfTrue to prevent other formats from being used
 # if the conditions of this format are met.
 $worksheet9->conditional_formatting( 'B3:K12',
     {
         type         => 'cell',
-        criteria     => '>=',
-        value        => 100,
+        criteria     => '>',
+        value        => 95,
         format       => $format3,
         stop_if_true => 1,
     }
 );
+
+# Write another conditional format over the same range.
+$worksheet9->conditional_formatting( 'B3:K12',
+    {
+        type     => 'formula',
+        criteria => '=MOD(B3,2)=1',
+        value    => 50,
+        format   => $format3,
+    }
+);
+
 
 # Write another conditional format over the same range.
 $worksheet9->conditional_formatting( 'B3:K12',
