@@ -52,8 +52,8 @@ $chart->add_series( values => '=Sheet1!$A$1:$A$5' );
 $chart->add_series( values => '=Sheet1!$B$1:$B$5' );
 $chart->add_series( values => '=Sheet1!$C$1:$C$5' );
 
-$chart->set_y_axis( major_gridlines => { visible => 0 } );
-$chart->{_y_axis}->{_major_tick_mark} = 'cross';
+$chart->set_y_axis( major_gridlines => { visible => 0},
+                    major_tick_mark => 'cross' );
 
 $worksheet->insert_chart( 'E9', $chart );
 
@@ -83,6 +83,3 @@ _is_deep_diff( $got, $expected, $caption );
 unlink $got_filename;
 
 __END__
-
-
-
