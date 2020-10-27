@@ -1151,6 +1151,7 @@ sub _store_workbook {
     # Add the files to the zip archive. Due to issues with Archive::Zip in
     # taint mode we can't use addTree() so we have to build the file list
     # with File::Find and pass each one to addFile().
+    # The no_chdir option to File::Find::find is for thread safety.
     my @xlsx_files;
 
     my $wanted = sub { push @xlsx_files, $File::Find::name if -f };
@@ -1158,6 +1159,7 @@ sub _store_workbook {
     File::Find::find(
         {
             wanted          => $wanted,
+            no_chdir        => 1,
             untaint         => 1,
             untaint_pattern => qr|^(.+)$|
         },
